@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 标识文件类型改文件为mapper DOCTYPE mapper -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace 绑定接口包路径 -->
+<mapper namespace="org.springcloud.dao.DeptDao">
+
+	<insert id="addDept">
+		INSERT INTO db02.dept( dname, db_source)
+		VALUES
+		(#{dname}, DATABASE())
+	</insert>
+
+	<select id="queryById" resultType="Dept" parameterType="Long">
+		SELECT *
+		FROM db02.dept where 1=1 and deptno = #{deptno}
+	</select>
+
+	<select id="queryList" resultType="Dept">
+		SELECT *
+		FROM db02.dept
+		where
+		1=1
+	</select>
+
+</mapper>

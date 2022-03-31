@@ -1,0 +1,37 @@
+server:
+  port: 8082
+#mybatis配置
+mybatis:  type-aliases-package: org.springcloud.pojo
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+#开启自动驼峰命名
+#  configuration:#    map-underscore-to-camel-case: 
+#spring配置
+spring:  application:    name: springcloud-provider-dept
+  datasource:    # 数据库名称
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db02?useUncode=true&characterEncoding=utf8&verifyServerCertificate=false&useSSL=false&allowMultiQueries=true
+    username: root
+    password: root
+#eureka 的配置
+eureka:  client:    service-url:
+      # 服务注册到哪里 打开eureka服务配置以配置中的地址为准 
+      # eureka配置好之后，开启eureka功能注解      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7001.com:7002/eureka,http://eureka7001.com:7003/eureka
+  instance:
+    # 修改eureka——Status up 描述    # instance-id: provider-dept-8081
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+# actuator 监控配置
+info:
+  app.name: provider-dept
+  company.name: blog.junjay.com
+  # 服务开发者名称（作者）
+  author: junjay
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "*"   
+  
